@@ -1,0 +1,12 @@
+USUARIO,cliente,juan,123,Juan,C1,0
+USUARIO,cliente,ana,456,Ana,C2,0
+
+MESA,M1
+MESA,M2
+
+JUEGO,J1,Catan,3,4,10,false
+JUEGO,J2,Twister,2,6,5,false
+
+RESERVA,juan,4,false,true,2026-04-06
+PRESTAMO,juan,M1,J1,2026-04-06
+VENTA,juan,2,5000,2000,2026-04-06,CAFETERIA

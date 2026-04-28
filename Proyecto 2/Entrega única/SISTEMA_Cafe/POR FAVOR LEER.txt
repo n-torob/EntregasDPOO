@@ -1,0 +1,19 @@
+INSTRUCCIONES DE EJECUCIÓN:
+
+1: En la carpeta "datos de prueba" están los escenarios de prueba, lo importante de estos son los nombres de los archivos junto a su extensión ".txt".
+
+2: En el paquete Pruebas, está la clase Main. En esta, verá que en la linea 13 hay una función que usa como parametro la ruta del escenario 1. para probar los otros, solo debe cambiar el numero del escenario.
+
+3: Cuando lo tenga listo, ejecute el proyecto desde esa misma clase: Main.
+
+Aquí una lista de lo que debería pasar con cada escenario de prueba:
+Escenario 1: Caso base donde todas las operaciones (reserva, préstamo y venta) se ejecutan correctamente.
+Escenario 2: Se evalúan casos límite, incluyendo una reserva que excede la capacidad y posibles restricciones en préstamos.
+Escenario 3: Escenario completo con múltiples usuarios, reservas, préstamos y ventas en distintos rubros.
+Escenario 4: Validación de múltiples reservas y ventas de cafetería en un mismo día.
+Escenario 5: Caso donde una reserva es rechazada debido a exceso de capacidad.
+Escenario 6: Préstamo rechazado por incumplimiento de restricciones del juego (edad o complejidad).
+Escenario 7: Combinación de ventas de juegos y cafetería junto con múltiples reservas y préstamos.
+Escenario 8: Ejecución simultánea de varias reservas y préstamos en diferentes mesas.
+Escenario 9: Escenario enfocado en múltiples ventas para validar consultas por fecha y tipo de rubro.
+Escenario 10: Caso sencillo de demostración rápida con una reserva, un préstamo y una venta.

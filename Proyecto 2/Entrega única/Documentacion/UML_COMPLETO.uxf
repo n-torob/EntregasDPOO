@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>798</x>
+      <y>480</y>
+      <w>276</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+Usuario
+--
+- login : String 
+- password : String 
+- nombre: String 
+- juegosFavoritos : ArrayList&lt;JuegoDeMesa&gt; 
+--
++ getLogin() : String 
++ setLogin(login : String) : void 
++ getPassword() : String 
++ setPassword(password : String) : void 
++ getNombre() : String 
++ setNombre(nombre : String) : void 
++ getJuegosFavoritos() : ArrayList&lt;JuegoDeMesa&gt; 
++ setJuegosFavoritos(juegosFavoritos : ArrayList&lt;JuegoDeMesa&gt;) : void 
++ agregarFavorito(juego : JuegoDeMesa) : void 
++ eliminarFavorito(juego : JuegoDeMesa) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1326</x>
+      <y>492</y>
+      <w>444</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+Empleado
+--
+- idEmpleado : String 
+--
++ getIdEmpleado() : String 
++ setIdEmpleado(idEmpleado : String) : void 
++ consultarTurnos() : ArrayList&lt;Turno&gt; 
++ solicitarCambioTurno(turnoActual : Turno, tipoSolicitud : TipoSolicitud) : SolicitudCambioTurno 
++ crearSugerenciaPlatillo(nombrePlatillo : String, descripcion : String) : SugerenciaPlatillo </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>1092</y>
+      <w>144</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+Platillo
+--
+- idPlatillo : String 
+- nombre : String 
+- precio : int 
+--
++ getIdPlatillo() : String 
++ setIdPlatillo(idPlatillo : String) : void 
++ getNombre() : String 
++ setNombre(nombre : String) : void 
++ getPrecio() : int 
++ setPrecio(precio : int) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>366</y>
+      <w>306</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Mesero
+--
+- juegosQueConoce : ArrayList&lt;JuegoDeMesa&gt; 
+--
++ getJuegosQueConoce() : ArrayList&lt;JuegoDeMesa&gt; 
++ setJuegosQueConoce(juegosQueConoce : ArrayList&lt;JuegoDeMesa&gt;) : void 
++ puedeExplicarJuego(juego : JuegoDeMesa) : boolean </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>582</x>
+      <y>480</y>
+      <w>192</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Cliente
+--
+- idCliente : String 
+- puntosFidelidad : int
+--
++ getIdCliente() : String 
++ setIdCliente(idCliente : String) : void 
++ getPuntosFidelidad() : int 
++ setPuntosFidelidad(puntosFidelidad : int) : void 
++ sumarPuntos(puntos : int) : void 
++ redimirPuntos(puntos : int) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1872</x>
+      <y>546</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Cocinero
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1362</x>
+      <y>810</y>
+      <w>324</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>Administrador
+--
+--
++ aprobarSolicitudCambio(solicitud : SolicitudCambioTurno) : void 
++ rechazarSolicitudCambio(solicitud : SolicitudCambioTurno) : void 
++ aprobarSugerencia(sugerencia : SugerenciaPlatillo) : void 
++ rechazarSugerencia(sugerencia : SugerenciaPlatillo) : void 
++ reabastecerInventario(idJuego : String, cantidad : int, tipoInventario : String) : void 
++ moverJuegoAVentaAPrestamo(idJuego : String, cantidad : int) : boolean 
++ repararJuego(idJuego : String) : void 
++ reportarJuegoDesaparecido(idJuego : String) : void 
++ actualizarEstadoJuego(juego : JuegoDeMesa, estado : EstadoJuego) : void 
++ consultarVentasPorFecha(rangoFechas : String) : ArrayList&lt;Venta&gt; 
++ consultarVentasPorRubro(rubro : RubroVenta) : ArrayList&lt;Venta&gt; 
++ consultarHistorialPrestamos() : ArrayList&lt;Prestamo&gt; </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>108</y>
+      <w>222</w>
+      <h>318</h>
+    </coordinates>
+    <panel_attributes>JuegoDeMesa
+--
+- idJuego : String 
+- nombre : String 
+- anioPublicacion : int 
+- empresaMatriz : String 
+- numJugadoresMin : int 
+- numJugadoresMax : int 
+- edadMinima : int 
+- categoria : CategoriaJuego 
+- esDificil : boolean 
+- estadoJuego : EstadoJuego 
+--
++ JuegoDeMesa(): void
++ getIdJuego() : String 
++ setIdJuego(idJuego : String) : void 
++ getNombre() : String 
++ setNombre(nombre : String) : void 
++ getAnioPublicacion() : int 
++ setAnioPublicacion(anioPublicacion : int) : void 
++ getEmpresaMatriz() : String 
++ setEmpresaMatriz(empresaMatriz : String) : void 
++ getNumJugadoresMin() : int 
++ setNumJugadoresMin(numJugadoresMin : int) : void 
++ getNumJugadoresMax() : int 
++ setNumJugadoresMax(numJugadoresMax : int) : void 
++ getEdadMinima() : int 
++ setEdadMinima(edadMinima : int) : void 
++ getCategoria() : CategoriaJuego 
++ setCategoria(categoria : CategoriaJuego) : void 
++ getEsDificil() : boolean 
++ setEsDificil(esDificil : boolean) : void 
++ getEstadoJuego() : EstadoJuego 
++ setEstadoJuego(estadoJuego : EstadoJuego) : void 
++ esAptoParaMesa(mesa : Mesa) : boolean </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>102</x>
+      <y>1140</y>
+      <w>156</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>JuegoVenta
+--
+- precio : int 
+- stockVenta : int
+-- 
++ getPrecio() : int 
++ setPrecio(precio : int) : void 
++ getStockVenta() : int 
++ setStockVenta(stockVenta : int) : void 
++ hayStock(cantidad : int) : boolean 
++ reducirStock(cantidad : int) : void 
++ aumentarStock(cantidad : int) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>972</y>
+      <w>210</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>JuegoPrestamo
+--
+- copiasDisponibles : int 
+- copiasPrestadas : int 
+--
++ getCopiasDisponibles() : int 
++ setCopiasDisponibles(copiasDisponibles : int) : void 
++ getCopiasPrestadas() : int 
++ setCopiasPrestadas(copiasPrestadas : int) : void 
++ hayDisponibilidad() : boolean 
++ prestar() : void 
++ devolver() : void 
++ aumentarCopiasDisponibles(cantidad : int) : void 
++ reducirCopiasDisponibles(cantidad : int) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>1014</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Cafe
+--
+- nombre : String 
+- direccion : String 
+- capacidadMaxima : int
+--
++ getNombre() : String 
++ setNombre(nombre : String) : void 
++ getDireccion() : String 
++ setDireccion(direccion : String) : void 
++ getCapacidadMaxima() : int 
++ setCapacidadMaxima(capacidadMaxima : int) : void 
++ tieneCapacidad(cantidadPersonas : int) : boolean </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>762</y>
+      <w>336</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>Mesa
+--
+- idMesa : String 
+- disponible : boolean 
+- cantidadPersonas : int 
+- hayNinios : boolean 
+- hayJovenes : boolean 
+--
++ getIdMesa() : String 
++ setIdMesa(idMesa : String) : void 
++ getDisponible() : boolean 
++ setDisponible(disponible : boolean) : void 
++ getCantidadPersonas() : int 
++ setCantidadPersonas(cantidadPersonas : int) : void 
++ getHayNinios() : boolean 
++ setHayNinios(hayNinios : boolean) : void 
++ getHayJovenes() : boolean 
++ setHayJovenes(hayJovenes : boolean) : void 
++ esCompatibleConJuego(juego : JuegoDeMesa) : boolean 
++ esCompatibleConBebida(bebida : Bebida) : boolean 
++ ocuparMesa(cantidadPersonas : int, hayNinios : boolean, hayJovenes : boolean) : void 
++ liberarMesa() : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>600</y>
+      <w>234</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Reserva
+--
+- idReserva : String 
+- estadoReserva : EstadoReserva 
+- fecha : String 
+--
++ getIdReserva() : String 
++ setIdReserva(idReserva : String) : void 
++ getEstadoReserva() : EstadoReserva 
++ setEstadoReserva(estadoReserva : EstadoReserva) : void 
++ getFecha() : String 
++ setFecha(fecha : String) : void 
++ confirmar() : void 
++ rechazar() : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>660</y>
+      <w>252</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>Prestamo
+--
+- idPrestamo : String 
+- estadoPrestamo : EstadoPrestamo 
+- fechaInicio : String 
+- fechaDevolucion : String 
+- advertenciaReglas : boolean 
+- juegos: ArrayList&lt;JuegoPrestamo&gt;
+- solicitante: Usuario
+- mesa: Mesa
+--
++ Prestamo(): void
++ getIdPrestamo() : String 
++ setIdPrestamo(idPrestamo : String) : void 
++ getEstadoPrestamo() : EstadoPrestamo 
++ setEstadoPrestamo(estadoPrestamo : EstadoPrestamo) : void 
++ getFechaInicio() : String 
++ setFechaInicio(fechaInicio : String) : void 
++ getFechaDevolucion() : String 
++ setFechaDevolucion(fechaDevolucion : String) : void 
++ getAdvertenciaReglas() : boolean 
++ setAdvertenciaReglas(advertenciaReglas : boolean) : void 
++ getSolicitante(): void
++ setSolicitante(solicitante: Usuario): void
++ getMesa(): void
++ setMesa (mesa: Mesa): void
++ agregarJuegoAPrestamo(juego : JuegoPrestamo) : void 
++ finalizarPrestamo() : void 
++ tieneCupoParaMasJuegos() : boolean </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>1230</y>
+      <w>168</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Bebida
+--
+- alcoholica : boolean 
+- caliente : boolean 
+--
++ getAlcoholica() : boolean 
++ setAlcoholica(alcoholica : boolean) : void 
++ getCaliente() : boolean 
++ setCaliente(caliente : boolean) : void 
++ esAptaParaMesa(mesa : Mesa) : boolean </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>1164</y>
+      <w>264</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Pasteleria
+--
+- posiblesAlergenos : ArrayList&lt;String&gt; 
+--
++ Pasteleria():  void
++ getPosiblesAlergenos() : ArrayList&lt;String&gt; 
++ setPosiblesAlergenos(posiblesAlergenos : ArrayList&lt;String&gt;) : void 
++ informarAlergenos() : ArrayList&lt;String&gt; 
++ agregarAlergeno(String: alergeno): void
++ eliminarAlergeno(String alergeno): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>834</y>
+      <w>204</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>Venta 
+--
+- idVenta : String 
+- fecha : String 
+- rubro : RubroVenta
+- subtotal : double 
+- impuestos : double 
+- propina : double 
+- total : double 
+- puntosGanados : int 
+- puntosRedimidos : int
+- detallesVenta: ArrayList&lt;DetalleVenta&gt;
+- comprador: Usuario 
+--
++ Venta(): void
++ getIdVenta() : String 
++ setIdVenta(idVenta : String) : void 
++ getFecha() : String 
++ setFecha(fecha : String) : void 
++ getRubro() : RubroVenta 
++ setRubro(rubro : RubroVenta) : void 
++ getSubtotal() : double 
++ setSubtotal(subtotal : double) : void 
++ getImpuestos() : double 
++ setImpuestos(impuestos : double) : void 
++ getPropina() : double 
++ setPropina(propina : double) : void 
++ getTotal() : double 
++ setTotal(total : double) : void 
++ getPuntosGanados() : int 
++ setPuntosGanados(puntosGanados : int) : void 
++ getPuntosRedimidos() : int 
++ setPuntosRedimidos(puntosRedimidos : int) : void 
++ calcularSubtotal() : double 
++ calcularImpuestos() : double 
++ calcularTotal() : double 
++ calcularPuntos() : int </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>876</x>
+      <y>1194</y>
+      <w>192</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>DetalleVenta
+--
+- idFactura : String 
+- cantidad : int 
+- precioUnitario : double 
+- subtotalLinea : double 
+--
++ getIdFactura() : String 
++ setIdFactura(idFactura : String) : void 
++ getCantidad() : int 
++ setCantidad(cantidad : int) : void 
++ getPrecioUnitario() : double 
++ setPrecioUnitario(precioUnitario : double) : void 
++ getSubtotalLinea() : double 
++ setSubtotalLinea(subtotalLinea : double) : void 
++ calcularSubtotalLinea() : double </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1104</x>
+      <y>792</y>
+      <w>192</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Turno
+--
+- idTurno : String 
+- diaSemana : DiaSemana 
+- horaInicio : String 
+- horaFin : String 
+--
++ getIdTurno() : String 
++ setIdTurno(idTurno : String) : void 
++ getDiaSemana() : DiaSemana 
++ setDiaSemana(diaSemana : DiaSemana) : void 
++ getHoraInicio() : String 
++ setHoraInicio(horaInicio : String) : void 
++ getHoraFin() : String 
++ setHoraFin(horaFin : String) : void 
++ esValido() : boolean </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1302</x>
+      <y>1164</y>
+      <w>204</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>SolicitudCambioTurno
+--
+- idSolicitud : String 
+- estado : EstadoSolicitud 
+- tipoSolicitud : TipoSolicitud 
+--
++ getIdSolicitud() : String 
++ setIdSolicitud(idSolicitud : String) : void 
++ getEstado() : EstadoSolicitud 
++ setEstado(estado : EstadoSolicitud) : void 
++ getTipoSolicitud() : TipoSolicitud 
++ setTipoSolicitud(tipoSolicitud : TipoSolicitud) : void 
++ aprobar() : void 
++ rechazar() : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1854</x>
+      <y>732</y>
+      <w>192</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>SugerenciaPlatillo
+--
+- idSugerencia : String 
+- nombrePlatillo : String 
+- descripcion : String 
+- estado : EstadoSugerencia 
+--
++ getIdSugerencia() : String 
++ setIdSugerencia(idSugerencia : String) : void 
++ getNombrePlatillo() : String 
++ setNombrePlatillo(nombrePlatillo : String) : void 
++ getDescripcion() : String 
++ setDescripcion(descripcion : String) : void 
++ getEstado() : EstadoSugerencia 
++ setEstado(estado : EstadoSugerencia) : void 
++ aprobar() : void 
++ rechazar() : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>438</x>
+      <y>1506</y>
+      <w>426</w>
+      <h>504</h>
+    </coordinates>
+    <panel_attributes>SistemaCafe
+--
+- cafe : Cafe 
+- usuarios : ArrayList&lt;Usuario&gt; 
+- juegosVenta : ArrayList&lt;JuegoVenta&gt; 
+- juegosPrestamo : ArrayList&lt;JuegoPrestamo&gt; 
+- mesas : ArrayList&lt;Mesa&gt; 
+- reservas : ArrayList&lt;Reserva&gt; 
+- prestamos : ArrayList&lt;Prestamo&gt; 
+- platillos : ArrayList&lt;Platillo&gt; 
+- ventas : ArrayList&lt;Venta&gt; 
+- turnos : ArrayList&lt;Turno&gt; 
+- solicitudesCambio : ArrayList&lt;SolicitudCambioTurno&gt; 
+- sugerenciasPlatillo : ArrayList&lt;SugerenciaPlatillo&gt;
+--
++ getCafe() : Cafe 
++ setCafe(cafe : Cafe) : void 
++ getUsuarios() : ArrayList&lt;Usuario&gt; 
++ setUsuarios(usuarios : ArrayList&lt;Usuario&gt;) : void 
++ getJuegosVenta() : ArrayList&lt;JuegoVenta&gt; 
++ setJuegosVenta(juegosVenta : ArrayList&lt;JuegoVenta&gt;) : void 
++ getJuegosPrestamo() : ArrayList&lt;JuegoPrestamo&gt; 
++ setJuegosPrestamo(juegosPrestamo : ArrayList&lt;JuegoPrestamo&gt;) : void 
++ getMesas() : ArrayList&lt;Mesa&gt; 
++ setMesas(mesas : ArrayList&lt;Mesa&gt;) : void 
++ getReservas() : ArrayList&lt;Reserva&gt; 
++ setReservas(reservas : ArrayList&lt;Reserva&gt;) : void 
++ getPrestamos() : ArrayList&lt;Prestamo&gt; 
++ setPrestamos(prestamos : ArrayList&lt;Prestamo&gt;) : void 
++ getPlatillos() : ArrayList&lt;Platillo&gt; 
++ setPlatillos(platillos : ArrayList&lt;Platillo&gt;) : void 
++ getVentas() : ArrayList&lt;Venta&gt; 
++ setVentas(ventas : ArrayList&lt;Venta&gt;) : void 
++ getTurnos() : ArrayList&lt;Turno&gt; 
++ setTurnos(turnos : ArrayList&lt;Turno&gt;) : void 
++ getSolicitudesCambio() : ArrayList&lt;SolicitudCambioTurno&gt; 
++ setSolicitudesCambio(solicitudesCambio : ArrayList&lt;SolicitudCambioTurno&gt;) : void 
++ getSugerenciasPlatillo() : ArrayList&lt;SugerenciaPlatillo&gt; 
++ setSugerenciasPlatillo(sugerenciasPlatillo : ArrayList&lt;SugerenciaPlatillo&gt;) : void 
++ crearReserva(cliente : Cliente, cantidadPersonas : int, hayNinios : boolean, hayJovenes : boolean) : Reserva 
++ realizarPrestamo(solicitante : Usuario, mesa : Mesa, listaJuegos : ArrayList&lt;JuegoPrestamo&gt;) : Prestamo 
++ devolverPrestamo(idPrestamo : String) : boolean 
++ registrarVenta(comprador : Usuario, listaItems : ArrayList&lt;Factura&gt;, propina : double) : Venta 
+# validarCapacidad(cantidadPersonas : int) : boolean 
+# asignarMesa(cantidadPersonas : int) : Mesa 
+# verificarRestriccionesPrestamo(mesa : Mesa, juegos : ArrayList&lt;JuegoPrestamo&gt;) : boolean 
+# verificarDisponibilidadJuego(juego : JuegoPrestamo) : boolean 
+# validarLimiteJuegos(mesa : Mesa) : boolean 
+# generarAdvertenciaJuegoDificil(juego : JuegoDeMesa) : boolean 
+# calcularImpuestos(rubro : RubroVenta, subtotal : double) : double 
+# calcularTotal(subtotal : double, impuestos : double, propina : double) : double 
+# calcularPuntos(total : double) : int 
+# validarCoberturaTurno() : boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>2124</y>
+      <w>390</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>PersistenciaSistema
+--
+- rutaDatos : String 
+--
++ PersistenciaProyecto()
++ guardarJuegosDeMesa(ArrayList&lt;JuegoDeMesa&gt;): void
++ cargarJuegosDeMesa(): ArrayList&lt;JuegoDeMesa&gt;
+- buscarJuego(String, ArrayList&lt;JuegoDeMesa&gt;): JuegoDeMesa
++ guardarInventarioPrestamo(ArrayList&lt;JuegoPrestamo&gt;): void
++ cargarInventarioPrestamo(ArrayList&lt;JuegoDeMesa&gt;): ArrayList&lt;JuegoPrestamo&gt;
++ guardarInventarioVenta(Map&lt;String, JuegoVenta&gt;): void
++ cargarInventarioVenta(): Map&lt;String, JuegoVenta&gt;
++ guardarClientes(ArrayList&lt;Cliente&gt;): void
++ cargarClientes(ArrayList&lt;JuegoDeMesa&gt;): ArrayList&lt;Cliente&gt;
++ guardarMeseros(ArrayList&lt;Mesero&gt;): void
++ cargarMeseros(ArrayList&lt;JuegoDeMesa&gt;): ArrayList&lt;Mesero&gt;
++ guardarCocineros(ArrayList&lt;Cocinero&gt;): void
++ cargarCocineros(ArrayList&lt;JuegoDeMesa&gt;): ArrayList&lt;Cocinero&gt;
++ guardarAdministradores(ArrayList&lt;Administrador&gt;): void
++ cargarAdministradores(): ArrayList&lt;Administrador&gt;
++ guardarVentas(ArrayList&lt;Venta&gt;): void
++ cargarVentas(): ArrayList&lt;Venta&gt;
++ guardarPrestamos(ArrayList&lt;Prestamo&gt;): void
++ cargarPrestamos(ArrayList&lt;JuegoDeMesa&gt;): ArrayList&lt;Prestamo&gt;
++ guardarMesas(ArrayList&lt;Mesa&gt;): void
++ cargarMesas(): ArrayList&lt;Mesa&gt;
++ guardarPlatillos(ArrayList&lt;Platillo&gt;): void
++ cargarPlatillos(): ArrayList&lt;Platillo&gt;
++ guardarTurnos(ArrayList&lt;Turno&gt;): void
++ cargarTurnos(): ArrayList&lt;Turno&gt;
++ guardarReservas(ArrayList&lt;Reserva&gt;): void
++ cargarReservas(): ArrayList&lt;Reserva&gt;
++ guardarSolicitudes(ArrayList&lt;SolicitudCambioTurno&gt;): void
++ cargarSolicitudes(): ArrayList&lt;SolicitudCambioTurno&gt;
++ guardarSugerencias(ArrayList&lt;SugerenciaPlatillo&gt;): void
++ cargarSugerencias(): ArrayList&lt;SugerenciaPlatillo&gt;
++ guardarCafe(Cafe): void
++ cargarCafe(): Cafe</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1068</x>
+      <y>498</y>
+      <w>270</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>430.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>486</y>
+      <w>42</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1068</x>
+      <y>600</y>
+      <w>462</w>
+      <h>222</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>750.0;350.0;750.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1320</x>
+      <y>390</y>
+      <w>108</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0;160.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1764</x>
+      <y>564</y>
+      <w>120</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>618</x>
+      <y>1188</y>
+      <w>54</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>762</x>
+      <y>1206</y>
+      <w>18</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>1152</y>
+      <w>18</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>960</y>
+      <w>18</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>876</x>
+      <y>420</y>
+      <w>30</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>570</y>
+      <w>30</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>720</y>
+      <w>30</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>132</x>
+      <y>492</y>
+      <w>462</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;280.0;10.0;10.0;750.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>366</x>
+      <y>564</y>
+      <w>972</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;180.0;1290.0;180.0;1290.0;10.0;1600.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>366</x>
+      <y>834</y>
+      <w>66</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>222</x>
+      <y>906</y>
+      <w>30</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>924</x>
+      <y>408</y>
+      <w>108</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1224</x>
+      <y>576</y>
+      <w>150</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;360.0;10.0;270.0;230.0;270.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1290</x>
+      <y>840</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1404</x>
+      <y>948</y>
+      <w>30</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;360.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1680</x>
+      <y>840</y>
+      <w>186</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>290.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1746</x>
+      <y>576</y>
+      <w>174</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>250.0;260.0;250.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>576</y>
+      <w>222</w>
+      <h>648</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;1050.0;350.0;1050.0;350.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>636</y>
+      <w>30</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;330.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>1086</y>
+      <w>180</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;250.0;100.0;250.0;100.0;10.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>1044</y>
+      <w>132</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>1056</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>240.0;60.0;240.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>612</x>
+      <y>984</y>
+      <w>264</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>420.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>48</x>
+      <y>90</y>
+      <w>834</w>
+      <h>918</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>80.0;1500.0;10.0;1500.0;10.0;10.0;1370.0;10.0;1370.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>36</x>
+      <y>18</y>
+      <w>876</w>
+      <h>1236</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+</panel_attributes>
+    <additional_attributes>110.0;2030.0;10.0;2030.0;10.0;10.0;1440.0;10.0;1440.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>138</x>
+      <y>1254</y>
+      <w>768</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0;1260.0;210.0;1260.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>798</x>
+      <y>1200</y>
+      <w>90</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>2166</w>
+      <h>1464</h>
+    </coordinates>
+    <panel_attributes>Mundo
+--
+bg=#d0fdd7
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>1116</y>
+      <w>114</w>
+      <h>426</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>170.0;680.0;10.0;680.0;10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>858</x>
+      <y>624</y>
+      <w>252</w>
+      <h>930</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+</panel_attributes>
+    <additional_attributes>10.0;1520.0;370.0;1520.0;370.0;10.0;360.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>708</y>
+      <w>168</w>
+      <h>810</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+</panel_attributes>
+    <additional_attributes>10.0;1330.0;10.0;1040.0;260.0;1040.0;260.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>60</x>
+      <y>834</y>
+      <w>390</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+</panel_attributes>
+    <additional_attributes>630.0;1170.0;10.0;1170.0;10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>936</y>
+      <w>102</w>
+      <h>582</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+</panel_attributes>
+    <additional_attributes>140.0;950.0;140.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>858</x>
+      <y>936</y>
+      <w>336</w>
+      <h>654</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+</panel_attributes>
+    <additional_attributes>10.0;1060.0;520.0;1060.0;520.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>858</x>
+      <y>1290</y>
+      <w>504</w>
+      <h>444</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;710.0;810.0;710.0;810.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>858</x>
+      <y>888</y>
+      <w>1062</w>
+      <h>906</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;1480.0;1740.0;1480.0;1740.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>2004</y>
+      <w>18</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>708</x>
+      <y>1338</y>
+      <w>234</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;280.0;10.0;100.0;370.0;100.0;370.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>414</x>
+      <y>1476</y>
+      <w>468</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>Sistema
+--
+bg=#2D6B3C
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>444</x>
+      <y>2100</y>
+      <w>432</w>
+      <h>390</h>
+    </coordinates>
+    <panel_attributes>Persistencia
+--
+bg=#E8FFF0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>6</x>
+      <y>6</y>
+      <w>2166</w>
+      <h>1464</h>
+    </coordinates>
+    <panel_attributes>Mundo
+--
+bg=#d0fdd7
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

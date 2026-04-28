@@ -1,0 +1,11 @@
+USUARIO,cliente,tomas,303,Tomas,C14,0
+
+MESA,M1
+MESA,M2
+
+JUEGO,J1,UNO,2,10,7,false
+JUEGO,J2,Twister,2,6,5,false
+
+RESERVA,tomas,2,false,false,2026-04-13
+PRESTAMO,tomas,M1,J1,2026-04-13
+VENTA,tomas,1,5000,500,2026-04-13,CAFETERIA
