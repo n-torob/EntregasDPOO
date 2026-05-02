@@ -7,6 +7,6 @@ public enum EstadoJuego {
     FALTA_PIEZA,
     DESAPARECIDO,
     ROBADO,
-    EN_REPARACION
+    EN_REPARACION, DISPONIBLE
 
 }

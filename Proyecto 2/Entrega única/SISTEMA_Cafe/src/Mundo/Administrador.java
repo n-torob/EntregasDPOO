@@ -26,49 +26,7 @@ public class Administrador extends Usuario {
     public void rechazarSugerencia(SugerenciaPlatillo sugerencia) {
         sugerencia.setEstado(EstadoSugerencia.RECHAZADA);
     }
-    public void reabastecerInventario(String idJuego, int cantidad, String tipoInventario) {
-    	if (tipoInventario.equals("VENTA")) {
-            JuegoVenta juego = SistemaCafe.buscarJuegoVenta(idJuego);
-            if (juego != null) {
-                juego.aumentarStock(cantidad);
-            }
-        }
 
-        if (tipoInventario.equals("PRESTAMO")) {
-            JuegoPrestamo juego = SistemaCafe.buscarJuegoPrestamo(idJuego);
-            if (juego != null) {
-                juego.aumentarCopiasDisponibles(cantidad);
-            }
-        }
-    }
-
-    public boolean moverJuegoAVentaAPrestamo(String idJuego, int cantidad,ArrayList<JuegoVenta> inventarioVenta, ArrayList<JuegoPrestamo> inventarioPrestamo) {
-    	JuegoVenta juegoVenta = SistemaCafe.buscarJuegoVenta(idJuego);
-        JuegoPrestamo juegoPrestamo = SistemaCafe.buscarJuegoPrestamo(idJuego);
-
-        if (juegoVenta != null && juegoPrestamo != null && juegoVenta.hayStock(cantidad)) {
-            juegoVenta.reducirStock(cantidad);
-            juegoPrestamo.aumentarCopiasDisponibles(cantidad);
-            return true;
-        }
-
-        return false;
-      
-    }
-
-    public void repararJuego(String idJuego) {
-    	JuegoDeMesa juego = SistemaCafe.buscarJuego(idJuego);
-        if (juego != null) {
-            juego.setEstadoJuego(EstadoJuego.EN_REPARACION);
-        }
-    }
-
-    public void reportarJuegoDesaparecido(String idJuego) {
-    	JuegoDeMesa juego = SistemaCafe.buscarJuego(idJuego);
-        if (juego != null) {
-            juego.setEstadoJuego(EstadoJuego.DESAPARECIDO);
-        }
-    }
 
     public void actualizarEstadoJuego(JuegoDeMesa juego, EstadoJuego estado) {
         juego.setEstadoJuego(estado);
@@ -86,5 +44,6 @@ public class Administrador extends Usuario {
         return new ArrayList<Prestamo>();
     }
 	
+    // En este apartado solamente se borraron los 4 metodos que generaban error porque ya existen en SistemaCafe.
 
 }

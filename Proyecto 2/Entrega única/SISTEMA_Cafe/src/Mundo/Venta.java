@@ -110,6 +110,16 @@ public class Venta {
         this.detallesVenta = detallesVenta;
     }
 
+    // NUEVO: getter y setter para comprador
+    
+    public Usuario getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(Usuario comprador) {
+        this.comprador = comprador;
+    }
+
     public void agregarDetalleVenta(DetalleVenta detalle) {
         detallesVenta.add(detalle);
     }

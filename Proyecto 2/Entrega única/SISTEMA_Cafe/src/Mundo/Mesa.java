@@ -7,6 +7,8 @@ public class Mesa {
 	private int cantidadPersonas;
 	private boolean hayNinios;
 	private boolean hayJovenes;
+	private boolean tieneBebidaCaliente; // NUEVO: indica si hay una bebida caliente en la mesa, bloquea préstamo de juegos ACCION
+	
 	
 	public Mesa(String idMesa, boolean disponible, int cantidadPersonas, boolean hayNinios, boolean hayJovenes) {
 		super();
@@ -15,6 +17,7 @@ public class Mesa {
 		this.cantidadPersonas = cantidadPersonas;
 		this.hayNinios = hayNinios;
 		this.hayJovenes = hayJovenes;
+		this.tieneBebidaCaliente = false; // Por defecto, no hay bebida caliente al crear la mesa
 	}
 
 	public String getIdMesa() {
@@ -56,6 +59,15 @@ public class Mesa {
 	public void setHayJovenes(boolean hayJovenes) {
 		this.hayJovenes = hayJovenes;
 	}
+
+	// NUEVO: getter y setter para tieneBebidaCaliente
+	public boolean isTieneBebidaCaliente() {
+		return tieneBebidaCaliente;
+	}
+ 
+	public void setTieneBebidaCaliente(boolean tieneBebidaCaliente) {
+		this.tieneBebidaCaliente = tieneBebidaCaliente;
+	}
 	
 	public boolean esCompatibleConJuego(JuegoDeMesa juego) {
         return juego.esAptoParaMesa(this);
@@ -73,13 +85,14 @@ public class Mesa {
         this.cantidadPersonas = 0;
         this.hayNinios = false;
         this.hayJovenes = false;
+		this.tieneBebidaCaliente = false; // Al liberar la mesa, 	ya no hay bebida caliente
     }
 	
 	public int getEdadMinimaParticipantes() {
     if (hayNinios) {
         return 0;
     } else if (hayJovenes) {
-        return 5;
+        return 10;
     } else {
         return 18;
     }

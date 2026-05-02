@@ -3,6 +3,7 @@ package Sistema;
 import java.util.ArrayList;
 
 import Mundo.Administrador;
+import Mundo.Bebida;          // NUEVO: necesario para verificar restricciones de bebida en registrarVenta
 import Mundo.Cafe;
 import Mundo.Cliente;
 import Mundo.Cocinero;
@@ -16,7 +17,7 @@ import Mundo.JuegoPrestamo;
 import Mundo.JuegoVenta;
 import Mundo.Mesa;
 import Mundo.Mesero;
-import Mundo.Platillo;
+import Mundo.Platillo;        // NUEVO: necesario para buscarPlatilloPorId
 import Mundo.Prestamo;
 import Mundo.Reserva;
 import Mundo.RubroVenta;
@@ -49,6 +50,8 @@ public class SistemaCafe {
     private int consecutivoVenta;
     private int consecutivoSolicitud;
     private int consecutivoSugerencia;
+    private int consecutivoCliente;   // NUEVO: para generar idCliente en registrarCliente
+    private int consecutivoEmpleado;  // NUEVO: para generar idEmpleado en registrarEmpleado
 
     // Constructor
     public SistemaCafe(Cafe cafe) {
@@ -70,9 +73,12 @@ public class SistemaCafe {
         this.consecutivoVenta = 1;
         this.consecutivoSolicitud = 1;
         this.consecutivoSugerencia = 1;
+        this.consecutivoCliente = 1;   // NUEVO
+        this.consecutivoEmpleado = 1;  // NUEVO
     }
 
     // Getters y Setters
+
     public Cafe getCafe() {
         return cafe;
     }
@@ -195,7 +201,56 @@ public class SistemaCafe {
         turnos.add(turno);
     }
 
+    // Autenticación y registro
+    // NUEVO: esta sección no existía en el sistema original
+
+    // NUEVO: verifica login y password. Retorna el Usuario si las credenciales son correctas, null si no.
+    public Usuario autenticar(String login, String password) {
+        Usuario usuario = buscarUsuarioPorLogin(login);
+        if (usuario == null) {
+            return null;
+        }
+        if (usuario.getPassword().equals(password)) {
+            return usuario;
+        }
+        return null;
+    }
+
+    // NUEVO: crea y registra un cliente. Retorna null si el login ya existe.
+    public Cliente registrarCliente(String login, String password, String nombre) {
+        if (buscarUsuarioPorLogin(login) != null) {
+            return null;
+        }
+        String idCliente = "C" + consecutivoCliente;
+        consecutivoCliente++;
+        Cliente cliente = new Cliente(login, password, nombre, null, idCliente, 0);
+        usuarios.add(cliente);
+        return cliente;
+    }
+
+    // NUEVO: crea y registra un empleado (MESERO o COCINERO). Retorna null si el login ya existe o el tipo es inválido.
+    public Empleado registrarEmpleado(String login, String password, String nombre, String tipo) {
+        if (buscarUsuarioPorLogin(login) != null) {
+            return null;
+        }
+        String idEmpleado = "E" + consecutivoEmpleado;
+        consecutivoEmpleado++;
+
+        Empleado empleado = null;
+        if (tipo.equalsIgnoreCase("MESERO")) {
+            empleado = new Mesero(login, password, nombre, new ArrayList<>(), idEmpleado, new ArrayList<>());
+        } else if (tipo.equalsIgnoreCase("COCINERO")) {
+            empleado = new Cocinero(login, password, nombre, new ArrayList<>(), idEmpleado);
+        } else {
+            return null;
+        }
+
+        usuarios.add(empleado);
+        return empleado;
+    }
+
     // Busquedas
+
     public Usuario buscarUsuarioPorLogin(String login) {
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).getLogin().equals(login)) {
@@ -259,12 +314,9 @@ public class SistemaCafe {
         return null;
     }
 
-    // Busqueda
-
-    public JuegoPrestamo buscarJuegoPrestamo (String idJuego) {
+    public JuegoPrestamo buscarJuegoPrestamo(String idJuego) {
         for (int i = 0; i < juegosPrestamo.size(); i++) {
             JuegoPrestamo jp = juegosPrestamo.get(i);
-
             if (jp.getJuego().getIdJuego().equals(idJuego)) {
                 return jp;
             }
@@ -275,7 +327,6 @@ public class SistemaCafe {
     public JuegoDeMesa buscarJuego(String idJuego) {
         for (int i = 0; i < juegosPrestamo.size(); i++) {
             JuegoPrestamo jp = juegosPrestamo.get(i);
-
             if (jp.getJuego().getIdJuego().equals(idJuego)) {
                 return jp.getJuego();
             }
@@ -283,15 +334,40 @@ public class SistemaCafe {
         return null;
     }
 
-    public JuegoVenta buscarJuegoVenta(int idJuego) {
-        if (idJuego >= 0 && idJuego < juegosVenta.size()) {
-            return juegosVenta.get(idJuego);
+    // CORREGIDO: antes recibía int (índice de lista), ahora recibe String idJuego para consistencia con el resto de búsquedas
+    public JuegoVenta buscarJuegoVenta(String idJuego) {
+        for (int i = 0; i < juegosVenta.size(); i++) {
+            if (juegosVenta.get(i).getJuego().getIdJuego().equals(idJuego)) {
+                return juegosVenta.get(i);
+            }
         }
         return null;
     }
 
+    // NUEVO: necesario para verificar el tipo de platillo en registrarVenta
+    
+    public Platillo buscarPlatilloPorId(String idPlatillo) {
+        for (int i = 0; i < platillos.size(); i++) {
+            if (platillos.get(i).getIdPlatillo().equals(idPlatillo)) {
+                return platillos.get(i);
+            }
+        }
+        return null;
+    }
+
+    // NUEVO: necesario para que la consola pueda buscar turnos por id al asignarlos
+
+    public Turno buscarTurnoPorId(String idTurno) {
+        for (int i = 0; i < turnos.size(); i++) {
+            if (turnos.get(i).getIdTurno().equals(idTurno)) {
+                return turnos.get(i);
+            }
+        }
+        return null;
+    }
 
     // Reservas
+
     public Reserva crearReserva(Cliente cliente, int cantidadPersonas, boolean hayNinios, boolean hayJovenes, String fecha) {
         if (cliente == null || cantidadPersonas <= 0) {
             return null;
@@ -352,6 +428,7 @@ public class SistemaCafe {
     }
 
     // Prestamos
+
     public Prestamo realizarPrestamo(Usuario solicitante, Mesa mesa, ArrayList<JuegoPrestamo> listaJuegos, String fechaInicio) {
         if (solicitante == null || listaJuegos == null || listaJuegos.isEmpty()) {
             return null;
@@ -387,6 +464,15 @@ public class SistemaCafe {
 
             if (mesa != null && !verificarRestriccionesPrestamo(mesa, juegoPrestamo)) {
                 return null;
+            }
+
+            // CORREGIDO: bloquea préstamo de juego ACCION si hay bebida caliente en la mesa
+            // El flag tieneBebidaCaliente se activa en registrarVenta cuando se vende una bebida caliente
+
+            if (mesa != null && juegoPrestamo.getJuego().getCategoria() == Mundo.CategoriaJuego.ACCION) {
+                if (mesa.isTieneBebidaCaliente()) {
+                    return null;
+                }
             }
 
             if (juegoPrestamo.getJuego().isEsDificil() && !hayMeseroCapacitado(juegoPrestamo.getJuego())) {
@@ -486,13 +572,37 @@ public class SistemaCafe {
     }
 
     // Ventas
-    public Venta registrarVenta(Usuario comprador, ArrayList<DetalleVenta> listaItems, double propina, String fecha, RubroVenta rubro) {
+
+    // CORREGIDO: recibe Mesa como parámetro adicional para verificar restricciones de bebida
+    // CORREGIDO: verifica que bebidas alcohólicas no se vendan a mesas con menores
+    // NUEVO: marca la mesa con tieneBebidaCaliente=true si se vende una bebida caliente,
+    //        para que realizarPrestamo pueda bloquear juegos ACCION en esa mesa
+
+    public Venta registrarVenta(Usuario comprador, ArrayList<DetalleVenta> listaItems,
+                                double propina, String fecha, RubroVenta rubro, Mesa mesa) {
         if (comprador == null || listaItems == null || listaItems.isEmpty() || rubro == null) {
             return null;
         }
 
         if (comprador instanceof Administrador) {
             return null;
+        }
+
+        if (rubro == RubroVenta.CAFETERIA && mesa != null) {
+            for (int i = 0; i < listaItems.size(); i++) {
+                Platillo platillo = buscarPlatilloPorId(listaItems.get(i).getIdDetalle());
+                if (platillo instanceof Bebida) {
+                    Bebida bebida = (Bebida) platillo;
+                    // CORREGIDO: bloquea venta si la bebida alcohólica no es apta para la mesa
+                    if (!bebida.esAptaParaMesa(mesa)) {
+                        return null;
+                    }
+                    // NUEVO: activa la advertencia en la mesa para bloquear préstamo de juegos ACCION
+                    if (bebida.isCaliente()) {
+                        mesa.setTieneBebidaCaliente(true);
+                    }
+                }
+            }
         }
 
         Venta venta = new Venta(generarIdVenta(), fecha, rubro, propina, 0, comprador);
@@ -540,6 +650,7 @@ public class SistemaCafe {
     }
 
     // Solicitudes de cambio de turno
+
     public SolicitudCambioTurno registrarSolicitudCambio(Empleado empleado, Turno turnoActual, TipoSolicitud tipoSolicitud) {
         if (empleado == null || turnoActual == null || tipoSolicitud == null) {
             return null;
@@ -577,6 +688,8 @@ public class SistemaCafe {
         return true;
     }
 
+    // CORREGIDO: antes contaba todos los empleados registrados en el sistema,
+    // ahora cuenta solo los que tienen al menos un turno asignado
     protected boolean validarCoberturaTurno() {
         int cantidadMeseros = 0;
         int cantidadCocineros = 0;
@@ -585,9 +698,15 @@ public class SistemaCafe {
             Usuario usuario = usuarios.get(i);
 
             if (usuario instanceof Mesero) {
-                cantidadMeseros++;
+                Mesero mesero = (Mesero) usuario;
+                if (!mesero.getTurnos().isEmpty()) { // CORREGIDO: solo cuenta si tiene turnos
+                    cantidadMeseros++;
+                }
             } else if (usuario instanceof Cocinero) {
-                cantidadCocineros++;
+                Cocinero cocinero = (Cocinero) usuario;
+                if (!cocinero.getTurnos().isEmpty()) { // CORREGIDO: solo cuenta si tiene turnos
+                    cantidadCocineros++;
+                }
             }
         }
 
@@ -595,6 +714,7 @@ public class SistemaCafe {
     }
 
     // Sugerencias de platillos
+
     public SugerenciaPlatillo registrarSugerenciaPlatillo(Empleado empleado, String nombrePlatillo, String descripcion) {
         if (empleado == null || nombrePlatillo == null || descripcion == null) {
             return null;
@@ -629,6 +749,7 @@ public class SistemaCafe {
     }
 
     // Inventario y Administración
+
     public void reabastecerJuegoPrestamo(JuegoPrestamo juegoPrestamo, int cantidad) {
         if (juegoPrestamo != null && cantidad > 0) {
             juegoPrestamo.aumentarCopiasDisponibles(cantidad);
@@ -639,6 +760,25 @@ public class SistemaCafe {
         if (juegoVenta != null && cantidad > 0) {
             juegoVenta.aumentarStock(cantidad);
         }
+    }
+
+    // NUEVO: mueve unidades del inventario de venta al de préstamo.
+    // Antes este método vivía en Administrador con llamadas estáticas incorrectas a SistemaCafe.
+    public boolean moverJuegoVentaAPrestamo(String idJuego, int cantidad) {
+        JuegoVenta juegoVenta = buscarJuegoVenta(idJuego);
+        JuegoPrestamo juegoPrestamo = buscarJuegoPrestamo(idJuego);
+
+        if (juegoVenta == null || juegoPrestamo == null) {
+            return false;
+        }
+
+        if (!juegoVenta.hayStock(cantidad)) {
+            return false;
+        }
+
+        juegoVenta.reducirStock(cantidad);
+        juegoPrestamo.aumentarCopiasDisponibles(cantidad);
+        return true;
     }
 
     public boolean reportarJuegoComoRobado(JuegoPrestamo juegoPrestamo) {
@@ -664,7 +804,35 @@ public class SistemaCafe {
         return true;
     }
 
+    // Turnos
+
+    // CORREGIDO: la relación de Empleado a Turno no estaba concreta en el sistema original.
+    // asignarTurnoAEmpleado centraliza la asignación y mantiene la lista global de turnos sincronizada
+
+    public boolean asignarTurnoAEmpleado(String idEmpleado, Turno turno) {
+        if (turno == null) {
+            return false;
+        }
+
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario usuario = usuarios.get(i);
+            if (usuario instanceof Empleado) {
+                Empleado empleado = (Empleado) usuario;
+                if (empleado.getIdEmpleado().equals(idEmpleado)) {
+                    empleado.agregarTurno(turno);
+                    if (!turnos.contains(turno)) {
+                        turnos.add(turno);
+                    }
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     // Generación de IDs
+
     private String generarIdReserva() {
         String id = "R" + consecutivoReserva;
         consecutivoReserva++;
